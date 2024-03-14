@@ -1,13 +1,17 @@
-from MyModul2 import *
+from MyModul import *
 
 kasutajad = []
 paroolid = []
 
+
+loe_autoriseerimine()
 while True:
     print("\n0 - Registreerimine\n1 - Autoriseerimine\n2 - Nime või parooli muutmine\n3 - Unustatud parooli taastamine\n4 - Lõpetamine")
     valik = input("Sisestage number: ")
     
     if valik == "4":
+        # Salvesta autoriseerimisandmed enne väljumist
+        salvesta_autoriseerimine()
         break
 
     kasutajanimi = input("Sisestage kasutajanimi: ")
@@ -19,6 +23,8 @@ while True:
         elif valik_parool.lower() == "g":
             parool = salasona(12)
         registreeri_kasutaja(kasutajanimi, parool, kasutajad, paroolid)
+        # Salvesta autoriseerimisandmed faili        
+        kirjutaFailisse("Autoriseerimine.txt", [f"{kasutajanimi}:{parool}"])
 
     elif valik == "1":
         parool = input("Sisestage oma parool: ")

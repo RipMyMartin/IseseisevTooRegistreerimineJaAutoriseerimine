@@ -26,6 +26,25 @@ def kirjutaFailisse(fail:str, jarjend=[]):
         f.write(el+"\n")
     f.close()
 
+def LoePasJaLog(fail:list)->any:
+    """Loeb failist andmed, mis oli sisestatud farmaadis "login:password" igas reas eraldi
+
+
+    """
+    fail=open(fail,"r",encoding="utf-8")
+    log=[]
+    pas=[]
+    logPas=[]
+    for line in fail:
+        n=line.find(":")
+        log.append(line[0:n].strip())
+        pas.append(line[n+1:len(line)].strip())
+        l,p=line.strip().split(":")
+        logPas[l]=p
+    fail.close()
+    return log,pas,logPas
+
+
 def heli(tekst:str,keel:str):
     obJ=gTTS(text=tekst,lang=keel,show=False).save("heli.mp3")
     system("heli.mp3")
